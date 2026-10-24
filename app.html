@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EventAssist — Winning App</title>
+<style>body{font-family:system-ui,sans-serif;max-width:960px;margin:2rem auto;padding:0 1rem}button{padding:.6rem 1rem;margin:.25rem;cursor:pointer}.card{border:1px solid #ddd;border-radius:8px;padding:1rem;margin:1rem 0}.path{font-family:monospace;background:#f4f4f4;padding:.5rem;border-radius:6px}.draft{border-left:4px solid #e67e22}</style></head>
+<body>
+<h1>EventAssist — fix the conference, don't just attend it</h1>
+<p><strong>One shared FalkorDB graph. Three agents. Every answer shows its path.</strong> Demo, live, no server, no token. Graph first: load <code>load_graph_complete.cypher</code> into FalkorDB Cloud, graph <code>eventassist</code>, then run <code>queries_complete.cypher</code> to verify.</p>
+<button onclick="show('concierge')">Concierge</button>
+<button onclick="show('network')">Networking</button>
+<button onclick="show('schedule')">Schedule</button>
+<button onclick="show('workshops')">Workshops</button>
+<button onclick="show('patterns')">Patterns</button>
+<button onclick="show('email')">Email draft</button>
+<button onclick="show('marketing')">Marketing draft</button>
+<button onclick="show('contacts')">All contacts</button>
+<div class="card" id="out"><p>Tap a button to run the winning demo.</p></div>
+<script>
+function show(k){const o=document.getElementById('out');
+if(k==='concierge')o.innerHTML="<h2>Concierge — Agents after lunch</h2><p><b>Agents That Remember</b> — Sara Kim, 14:30, Main Hall</p><p><b>Multi-Hop Reasoning</b> — Diego Ramos, 15:15, Room B</p><p class='path'>Speaker —GIVES→ Talk —ABOUT→ Topic(Agents), WHERE starts ≥ 14:00</p>";
+if(k==='network')o.innerHTML="<h2>Networking — for Ava Chen</h2><p><b>Priya Nair</b> — Agents, GraphRAG (strongest unmet pair)</p><p><b>Tom Rivera</b> — GraphRAG</p><p>Not Marcus Lee — already MET (memory).</p><p class='path'>Ava —INTERESTED_IN→ Topic ←INTERESTED_IN— Candidate, AND NOT Ava —MET→ Candidate</p>";
+if(k==='schedule')o.innerHTML="<h2>Schedule — Ava's plan</h2><p><b>Clash at 14:30:</b> Agents That Remember (Main Hall) vs Robotics on the Factory Floor (Room C).</p><p>Alternative: keep Agents, watch GraphRAG at 16:00.</p><p class='path'>Ava —PLANS→ Talk —AT→ TimeSlot ←AT— Talk ←PLANS— Ava</p>";
+if(k==='workshops')o.innerHTML="<h2>Deep workshops</h2><p><b>Agents That Remember</b> — Sara Kim, 14:30, Main Hall — Ava, Marcus, Priya</p><p><b>Multi-Hop Reasoning</b> — Diego Ramos, 15:15, Room B — Ava, Marcus, Priya</p><p><b>Robotics on the Factory Floor</b> — Lena Park, 14:30, Room C — Priya (bridge)</p><p><b>GraphRAG From Docs to Answers</b> — Sara Kim, 16:00, Main Hall — Ava, Priya, Tom</p><p>Full overviews in workshops.md.</p>";
+if(k==='patterns')o.innerHTML="<h2>Graph patterns</h2><p><b>Speaker hub:</b> Sara Kim (2 talks)</p><p><b>Bridge attendee:</b> Priya Nair (Agents, GraphRAG, Robotics)</p><p><b>Strongest unmet pair:</b> Ava ↔ Priya (2 topics)</p><p><b>Memory pair:</b> Ava ↔ Marcus (already met)</p><p><b>Clash slot:</b> 14:30 (only slot with 2 talks)</p><p>Full patterns in patterns.cypher.</p>";
+if(k==='email')o.innerHTML="<div class='draft'><h2>Email draft — DRAFT, NOT SENT</h2><p><b>To:</b> Priya Nair — <b>Subject:</b> Intro at Patch the Conference — shared Agents, GraphRAG</p><p>Hi Priya, EventAssist suggested we meet because we both care about Agents and GraphRAG. Would you like to meet after the next talk? — Ava</p><p>Grounding path shown in agents_email_marketing.py. Approve before any send.</p></div>";
+if(k==='marketing')o.innerHTML="<div class='draft'><h2>Marketing draft — DRAFT, NOT SENT</h2><p><b>Patch the Conference: fix the conference, don't just attend it.</b></p><p>You miss the right talk, you never meet the right person, and your plan clashes. EventAssist fixes all three with one shared graph — and remembers who you have already met.</p></div>";
+if(k==='contacts')o.innerHTML="<h2>All contacts — updated, aggregates only</h2><p><b>3,678 rows uploaded, 3,476 unique contacts</b> by ZoomInfo ID, across 12 files. Duplicates removed: 202.</p><p><b>Top industry:</b> Manufacturing 2,094 — then Business Services 381, Finance 312, Energy 223.</p><p><b>Top job functions:</b> Finance Executive 990, Executive 618, Finance 375, Sourcing/Procurement 327.</p><p><b>Top companies:</b> Sanmina 174, Applied Materials 91, Sun Pharma 71, SuperMicro 70, Petronas 60.</p><p><b>Geography:</b> California 1,730 — San Jose 274, San Diego 157, San Francisco 140, Santa Clara 118.</p><p>Full contact list is private (contacts_graph.json, no email/phone/address) and is <b>not</b> pushed to GitHub or shown on stage. Segments for email/marketing are in contacts_patterns.md — drafts only, approval required.</p>";
+}
+</script></body></html>
