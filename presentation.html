@@ -32,4 +32,12 @@
 <tr><td style="border:1px solid #eee;padding:.4rem"><b>4. Working demo, live</b></td><td style="border:1px solid #eee;padding:.4rem">It runs in front of judges, not just slides</td><td style="border:1px solid #eee;padding:.4rem">product_v2.html runs offline, no login. Then live: load_graph_complete.cypher (19 nodes, 26 edges) + queries_complete.cypher in FalkorDB Browser. Tests: test_eventassist.py, 7/7 passing.</td></tr></table>
 <p><b>Prize track:</b> Best use of FalkorDB — $1,500, or phone / cash instead, one prize per track. Demos / judging 5:30–7:00pm PT, Bright Data, 625 2nd St, San Francisco.</p>
 <p><b>If a judge pushes back:</b> "Show me it's not a list" → mark a match as met and re-run. "Show me the path" → read the monospace path under any answer. "Show me scale" → contacts aggregates (3,476) + contacts_load.py, with individual contact data kept private.</p></div>
+<div class="slide"><h2>Slide 11 — Deep graphs + FalkorDB tools, live</h2>
+<p>Not a diagram on a slide — a clickable graph in product_v3.html: Speakers, Talks, Topics, Attendees, TimeSlots, Memory. Click Sara Kim (speaker hub, 2 talks), click Priya (bridge), click 14:30 (clash).</p>
+<p><b>FalkorDB tools in the pitch:</b> FalkorDB Cloud instance-si114dlr3, Browser, graph eventassist. Load load_graph_complete.cypher (19 nodes, 26 edges), run queries_complete.cypher, run patterns.cypher P1–P6. Same queries, same answers, in the Browser and in the product.</p>
+<p class="path">MATCH (s:Speaker)-[:GIVES]-&gt;(t:Talk)-[:ABOUT]-&gt;(tp:Topic {name:'Agents'}) RETURN s.name, t.title, t.starts ORDER BY t.starts</p></div>
+<div class="slide"><h2>Slide 12 — Qodo in the pitch</h2>
+<p>Qodo.ai is connected to GitHub. PR #1 (AGIFutureFoundation/EventAssist/pull/1) carries this whole project — code, wiki, deck, Qodo config.</p>
+<p><b>How it works:</b> .pr_agent.toml at repo root auto-runs /review, /describe, /improve on PRs, with EventAssist rules: Cypher/graph correctness, no invented data, no private contact data, tests must pass. On any PR, comment /review, /improve, /ask, /test.</p>
+<p>Qodo is repo tooling and the separate $500 track. The submission track stays FalkorDB — Qodo reviews the code that implements the graph, it does not replace the graph story.</p></div>
 </body></html>
