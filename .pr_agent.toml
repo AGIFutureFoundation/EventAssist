@@ -1,0 +1,35 @@
+# Qodo Merge configuration for EventAssist
+# Place this file at the repository root as .pr_agent.toml
+# It only takes effect after the Qodo GitHub App is installed on the repo (see QODO_SETUP.md).
+# It does not install Qodo by itself.
+
+[github_app]
+pr_commands = [
+    "/review",
+    "/describe",
+    "/improve",
+]
+
+[pr_reviewer]
+num_code_suggestions = 4
+inline_code_comments = true
+require_estimate_effort_to_review = true
+extra_instructions = """
+Focus on: graph correctness (Cypher queries must match the eventassist model: Speaker-GIVES-Talk-ABOUT-Topic, Attendee-INTERESTED_IN-Topic, Attendee-MET-Attendee, Attendee-PLANS-Talk, Talk-AT-TimeSlot), logic errors, missing error handling, and security.
+Do NOT approve invented contacts, speakers, talks, times, or venues — all demo data must come from graph_data.json / load_graph_complete.cypher.
+Do NOT approve individual email addresses, phone numbers, or street addresses in code, docs, or demos — contacts in this project are aggregates only.
+Flag any change that would push contacts_graph.json or a full contact list to GitHub.
+Check that Python changes keep test_eventassist.py passing (concierge 2 Agents talks, networking Priya not Marcus, 14:30 clash, memory update).
+Do not comment on formatting alone.
+"""
+
+[pr_description]
+publish_labels = true
+use_bullet_points = true
+add_original_user_description = true
+
+[pr_code_suggestions]
+num_code_suggestions = 4
+extra_instructions = """
+Prioritize suggestions that fix graph-query bugs, broken paths, or missing tests. Keep suggestions small and committable.
+"""

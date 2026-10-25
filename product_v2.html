@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EventAssist — Working Application for Judges</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:1040px;margin:0 auto;padding:1rem 1rem 3rem}
+header{display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:baseline}
+nav button,.btn{padding:.55rem .9rem;margin:.2rem;cursor:pointer;border:1px solid #ccc;border-radius:999px;background:#fff}
+nav button.active,.btn.primary{background:#111;color:#fff}
+.card{border:1px solid #ddd;border-radius:12px;padding:1.2rem;margin:1rem 0}
+.path{font-family:monospace;background:#f4f4f4;padding:.6rem;border-radius:8px;white-space:pre-wrap}
+input,select{padding:.5rem;margin:.25rem;max-width:420px;width:100%}
+.small{color:#555}.draft{border-left:5px solid #e67e22}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #eee;padding:.4rem;text-align:left}
+details{margin:.5rem 0}
+</style></head>
+<body>
+<header><div><h1 style="margin:0">EventAssist — Working Application</h1><p class="small">For judges: pick an attendee, pick a topic, watch the graph answer — and change it. Every answer shows its path.</p></div><div class="small">FalkorDB graph: eventassist<br>19 nodes · 26 edges<br>Instance: instance-si114dlr3<br>Offline demo, no token</div></header>
+
+<div class="card"><h2>1. Connect the graph and data</h2>
+<p><b>Live FalkorDB (your instance):</b> Open instance-si114dlr3, open Browser, select graph <code>eventassist</code>, run <code>load_graph_complete.cypher</code>, then <code>queries_complete.cypher</code> and <code>patterns.cypher</code>. Expected: 19 nodes, 26 edges.</p>
+<p><b>This product:</b> The same graph is embedded below, so judges can run it with no server, no login, and no token — then verify it in FalkorDB with the same queries.</p>
+<p><b>Data connected:</b> Demo graph (speakers, talks, topics, attendees, timeslots) + workshops deep overviews + patterns + contacts aggregates (3,476 unique contacts, no individual email/phone/address in this file) + email/marketing drafts (drafts only).</p>
+<label>Choose an attendee
+<select id="attendee"><option value="ava">Ava Chen</option><option value="priya">Priya Nair</option><option value="marcus">Marcus Lee</option><option value="tom">Tom Rivera</option></select></label>
+<label>Choose a topic
+<select id="topic"><option>Agents</option><option>GraphRAG</option><option>Robotics</option><option>Security</option><option>Data</option></select></label>
+<button class="btn primary" onclick="runAll()">Run all agents for this attendee + topic</button>
+<button class="btn" onclick="resetMemory()">Reset memory</button>
+</div>
+
+<div class="card" id="out"><p>Choose an attendee and topic, then run all agents.</p></div>
+
+<div class="card"><h2>2. Workshops, deep</h2>
+<details><summary><b>Agents That Remember</b> — Sara Kim, 14:30, Main Hall</summary><p>Memory as edges, not text. Attendees: Ava, Priya, Marcus by topic. Clash: Robotics at 14:30. Bridge: Priya. Real segment: Manufacturing Finance/Procurement in California.</p></details>
+<details><summary><b>Multi-Hop Reasoning</b> — Diego Ramos, 15:15, Room B</summary><p>Path as proof, no invented hop. Attendees: Ava, Marcus, Priya by topic. No clash. Judge test: ask how you got that answer, expect a path.</p></details>
+<details><summary><b>Robotics on the Factory Floor</b> — Lena Park, 14:30, Room C</summary><p>Niche test: 1 talk, 1 interested demo attendee (Priya, the bridge). Real segment: Manufacturing 2,094 contacts. Clash: Agents at 14:30.</p></details>
+<details><summary><b>GraphRAG From Docs to Answers</b> — Sara Kim, 16:00, Main Hall</summary><p>Docs → graph → auditable answers. Attendees: Ava, Priya, Tom. Speaker hub: Sara Kim (2 talks). Alternative after the 14:30 clash.</p></details>
+</div>
+
+<div class="card"><h2>3. Judges — evidence checklist</h2>
+<table><tr><th>Criterion</th><th>Evidence in this app</th></tr>
+<tr><td>Graph at the core</td><td>Multi-hop, shared state, memory — not a list. Change memory, networking changes.</td></tr>
+<tr><td>Explainable answers</td><td>Every answer shows its path in monospace below the answer.</td></tr>
+<tr><td>Real conference problem</td><td>Missed talks, missed people, clashing plans — all three, live.</td></tr>
+<tr><td>Working demo</td><td>This file, offline, plus live FalkorDB queries in queries_complete.cypher.</td></tr></table>
+</div>
+
+<script>
+const talks=[
+{id:"t1",t:"Agents That Remember: Graph Memory in Production",s:"Sara Kim",starts:"14:30",venue:"Main Hall",topics:["Agents","GraphRAG"]},
+{id:"t2",t:"Multi-Hop Reasoning Without Hallucinating",s:"Diego Ramos",starts:"15:15",venue:"Room B",topics:["Agents"]},
+{id:"t3",t:"Robotics on the Factory Floor",s:"Lena Park",starts:"14:30",venue:"Room C",topics:["Robotics"]},
+{id:"t4",t:"GraphRAG From Docs to Answers",s:"Sara Kim",starts:"16:00",venue:"Main Hall",topics:["GraphRAG"]}];
+const people={
+ava:{name:"Ava Chen",interests:["Agents","GraphRAG"],plans:["t1","t3"],met:["Marcus Lee"]},
+priya:{name:"Priya Nair",interests:["Agents","GraphRAG","Robotics"],plans:["t1"],met:[]},
+marcus:{name:"Marcus Lee",interests:["Agents"],plans:["t2"],met:["Ava Chen"]},
+tom:{name:"Tom Rivera",interests:["GraphRAG"],plans:["t4"],met:[]}};
+let metState=JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(people).map(([k,v])=>[k,[...v.met]]))));
+function talkById(id){return talks.find(x=>x.id===id)}
+function runAll(){
+const aid=document.getElementById('attendee').value, topic=document.getElementById('topic').value;
+const me=people[aid];
+const concierge=talks.filter(x=>x.topics.includes(topic));
+const network=Object.values(people).filter(p=>p.name!==me.name && !metState[aid].includes(p.name) && p.interests.some(i=>me.interests.includes(i))).map(p=>`${p.name} — shared: ${p.interests.filter(i=>me.interests.includes(i)).join(', ')}`);
+const planned=me.plans.map(talkById);
+const clash=planned.length>1 && planned[0].starts===planned[1].starts ? `<b>Clash at ${planned[0].starts}:</b> ${planned.map(x=>x.t).join(' vs ')}` : 'No clash in this plan.';
+const out=document.getElementById('out');
+out.innerHTML=`<h2>Results for ${me.name} — topic ${topic}</h2>
+<h3>Concierge</h3>${concierge.length?concierge.map(x=>`<p><b>${x.t}</b> — ${x.s}, ${x.starts}, ${x.venue}</p>`).join(''):'<p>No talks on this topic in the demo graph. Try Agents or GraphRAG.</p>'}
+<p class='path'>Speaker —GIVES→ Talk —ABOUT→ Topic(${topic})</p>
+<h3>Networking (live memory)</h3>${network.length?network.map(x=>`<p>${x}</p>`).join(''):'<p>No unmet shared-topic matches for this attendee.</p>'}
+<p class='path'>${me.name} —INTERESTED_IN→ Topic ←INTERESTED_IN— Candidate, AND NOT ${me.name} —MET→ Candidate</p>
+<p>Already met: ${metState[aid].join(', ')||'none'}. <button class="btn" onclick="meetFirst()">Mark first networking match as met, then re-run</button></p>
+<h3>Schedule</h3><p>${clash}</p><p>Planned: ${planned.map(x=>`${x.t} (${x.starts})`).join(', ')}</p>
+<p class='path'>Attendee —PLANS→ Talk —AT→ TimeSlot ←AT— Talk ←PLANS— Attendee</p>
+<div class='draft'><h3>Email draft — DRAFT, NOT SENT</h3><p>${network.length?`Intro to ${network[0].split(' — ')[0]}, shared topics in the graph, with the path shown. Approve before any send.`:'No networking match to draft for.'}</p></div>
+<div class='draft'><h3>Marketing draft — DRAFT, NOT SENT</h3><p>Why ${topic} is the thread through this conference: every ${topic} talk is linked, speaker to talk to topic, so you can follow the thread instead of guessing.</p></div>`;
+}
+function meetFirst(){
+const aid=document.getElementById('attendee').value; const me=people[aid];
+const cand=Object.values(people).find(p=>p.name!==me.name && !metState[aid].includes(p.name) && p.interests.some(i=>me.interests.includes(i)));
+if(cand){metState[aid].push(cand.name); alert(`Memory updated: ${me.name} has now met ${cand.name}. Re-run to see networking change.`);} else alert('No unmet match to mark as met.');
+}
+function resetMemory(){metState=JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(people).map(([k,v])=>[k,[...v.met]])))); runAll();}
+runAll();
+</script></body></html>

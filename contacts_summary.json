@@ -1,0 +1,377 @@
+{
+  "total_rows_in_uploads": 3678,
+  "unique_contacts_by_zoominfo_id": 3476,
+  "unique_emails_in_uploads": 2873,
+  "files": 12,
+  "top_industries": [
+    [
+      "Manufacturing",
+      1965
+    ],
+    [
+      "Business Services",
+      369
+    ],
+    [
+      "Finance",
+      311
+    ],
+    [
+      "Energy, Utilities & Waste",
+      200
+    ],
+    [
+      "Transportation",
+      144
+    ],
+    [
+      "Retail",
+      133
+    ],
+    [
+      "Construction",
+      130
+    ],
+    [
+      "Education",
+      68
+    ],
+    [
+      "Software",
+      36
+    ],
+    [
+      "Hospitals & Physicians Clinics",
+      21
+    ],
+    [
+      "Organizations",
+      19
+    ],
+    [
+      "Real Estate",
+      19
+    ],
+    [
+      "Consumer Services",
+      17
+    ],
+    [
+      "Healthcare Services",
+      17
+    ],
+    [
+      "Minerals & Mining",
+      7
+    ],
+    [
+      "Telecommunications",
+      5
+    ],
+    [
+      "Hospitality",
+      5
+    ],
+    [
+      "Holding Companies & Conglomerates",
+      4
+    ],
+    [
+      "Agriculture",
+      3
+    ],
+    [
+      "Government",
+      3
+    ]
+  ],
+  "top_companies": [
+    [
+      "Sanmina",
+      174
+    ],
+    [
+      "Applied Materials",
+      91
+    ],
+    [
+      "Sun Pharma",
+      71
+    ],
+    [
+      "SuperMicro",
+      70
+    ],
+    [
+      "Petronas",
+      60
+    ],
+    [
+      "BD",
+      44
+    ],
+    [
+      "Tesla",
+      43
+    ],
+    [
+      "Charles River",
+      27
+    ],
+    [
+      "Boeing",
+      23
+    ],
+    [
+      "L3Harris Technologies",
+      22
+    ],
+    [
+      "Ambit Energy",
+      18
+    ],
+    [
+      "Teledyne Technologies",
+      18
+    ],
+    [
+      "Howmet Aerospace",
+      17
+    ],
+    [
+      "MilliporeSigma",
+      15
+    ],
+    [
+      "ResMed",
+      14
+    ],
+    [
+      "Organon",
+      13
+    ],
+    [
+      "SunPower",
+      13
+    ],
+    [
+      "The Aerospace Corporation",
+      13
+    ],
+    [
+      "Sanyo Denki",
+      13
+    ],
+    [
+      "Viatris",
+      12
+    ]
+  ],
+  "top_job_functions": [
+    [
+      "Finance Executive",
+      934
+    ],
+    [
+      "Executive",
+      517
+    ],
+    [
+      "Finance",
+      355
+    ],
+    [
+      "Sourcing / Procurement",
+      327
+    ],
+    [
+      "Operations Executive",
+      115
+    ],
+    [
+      "Product Management",
+      42
+    ],
+    [
+      "Operations",
+      32
+    ],
+    [
+      "Accounting",
+      28
+    ],
+    [
+      "Engineering & Technical",
+      19
+    ],
+    [
+      "Engineering & Technical Executive",
+      15
+    ],
+    [
+      "Research & Development",
+      13
+    ],
+    [
+      "Sales",
+      11
+    ],
+    [
+      "Compliance",
+      9
+    ],
+    [
+      "Legal Executive",
+      8
+    ],
+    [
+      "Corporate Strategy",
+      8
+    ],
+    [
+      "Office Operations",
+      8
+    ],
+    [
+      "Medical Administration",
+      7
+    ],
+    [
+      "Information Technology Executive",
+      7
+    ],
+    [
+      "Information Technology",
+      6
+    ],
+    [
+      "Legal Counsel",
+      6
+    ]
+  ],
+  "top_states": [
+    [
+      "California",
+      1647
+    ],
+    [
+      "Texas",
+      178
+    ],
+    [
+      "Massachusetts",
+      149
+    ],
+    [
+      "Virginia",
+      109
+    ],
+    [
+      "Florida",
+      91
+    ],
+    [
+      "Pennsylvania",
+      82
+    ],
+    [
+      "Maharashtra",
+      81
+    ],
+    [
+      "New Jersey",
+      80
+    ],
+    [
+      "Arizona",
+      79
+    ],
+    [
+      "New York",
+      69
+    ],
+    [
+      "Ohio",
+      67
+    ],
+    [
+      "Kuala Lumpur",
+      60
+    ],
+    [
+      "North Carolina",
+      46
+    ],
+    [
+      "Maryland",
+      39
+    ],
+    [
+      "Michigan",
+      33
+    ]
+  ],
+  "top_cities": [
+    [
+      "San Jose",
+      274
+    ],
+    [
+      "San Diego",
+      147
+    ],
+    [
+      "San Francisco",
+      140
+    ],
+    [
+      "Santa Clara",
+      117
+    ],
+    [
+      "Mumbai",
+      78
+    ],
+    [
+      "Palo Alto",
+      66
+    ],
+    [
+      "Kuala Lumpur",
+      60
+    ],
+    [
+      "Austin",
+      56
+    ],
+    [
+      "Menlo Park",
+      51
+    ],
+    [
+      "Franklin Lakes",
+      46
+    ],
+    [
+      "Irvine",
+      45
+    ],
+    [
+      "Arlington",
+      44
+    ],
+    [
+      "Houston",
+      43
+    ],
+    [
+      "South San Francisco",
+      41
+    ],
+    [
+      "Wilmington",
+      37
+    ]
+  ],
+  "note": "Aggregates only. No individual email, phone, or address in this summary."
+}

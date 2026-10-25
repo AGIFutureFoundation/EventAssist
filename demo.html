@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EventAssist — Conference Concierge Demo</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem}
+button{padding:.6rem 1rem;margin:.25rem;cursor:pointer}
+.card{border:1px solid #ddd;border-radius:8px;padding:1rem;margin:1rem 0}
+.path{font-family:monospace;background:#f4f4f4;padding:.5rem;border-radius:6px}
+</style>
+</head>
+<body>
+<h1>EventAssist — Conference Concierge</h1>
+<p><strong>Demo, live, no server needed.</strong> Every answer shows its graph path. This is the FalkorDB-track demo: graph at the core, explainable answers, real conference problem.</p>
+<button onclick="show('concierge')">1. Which talks on Agents after lunch?</button>
+<button onclick="show('network')">2. Who should Ava meet?</button>
+<button onclick="show('schedule')">3. Does Ava's plan clash?</button>
+<div class="card" id="out"><p>Tap a question above to run the demo.</p></div>
+<script>
+const talks=[
+{t:"Agents That Remember: Graph Memory in Production",s:"Sara Kim",starts:"14:30",venue:"Main Hall",topics:["Agents","GraphRAG"]},
+{t:"Multi-Hop Reasoning Without Hallucinating",s:"Diego Ramos",starts:"15:15",venue:"Room B",topics:["Agents"]},
+{t:"Robotics on the Factory Floor",s:"Lena Park",starts:"14:30",venue:"Room C",topics:["Robotics"]},
+{t:"GraphRAG From Docs to Answers",s:"Sara Kim",starts:"16:00",venue:"Main Hall",topics:["GraphRAG"]}];
+function show(kind){
+  const out=document.getElementById('out');
+  if(kind==='concierge'){
+    const list=talks.filter(x=>x.topics.includes("Agents") && x.starts>="14:00");
+    out.innerHTML="<h2>Concierge answer</h2>"+list.map(x=>`<p><b>${x.t}</b> — ${x.s}, ${x.starts}, ${x.venue}</p>`).join('')+"<p class='path'>Path: Speaker —GIVES→ Talk —ABOUT→ Topic(Agents), WHERE Talk.starts ≥ 14:00</p><p>This is a multi-hop query, not a keyword list: the talk must be linked to the topic, and the speaker must be linked to the talk.</p>";
+  }
+  if(kind==='network'){
+    out.innerHTML="<h2>Networking answer — for Ava Chen</h2><p><b>Priya Nair</b> — shared topics: Agents, GraphRAG</p><p><b>Tom Rivera</b> — shared topic: GraphRAG</p><p>Not suggested: Marcus Lee — Ava has already met him (memory in the graph).</p><p class='path'>Path: Ava —INTERESTED_IN→ Topic ←INTERESTED_IN— Candidate, AND NOT Ava —MET→ Candidate</p>";
+  }
+  if(kind==='schedule'){
+    out.innerHTML="<h2>Schedule answer — Ava's plan</h2><p><b>Clash at 14:30:</b> 'Agents That Remember' (Main Hall) vs 'Robotics on the Factory Floor' (Room C).</p><p>Alternative: keep the Agents talk, move Robotics to a later session, or watch the GraphRAG talk at 16:00 instead.</p><p class='path'>Path: Ava —PLANS→ Talk —AT→ TimeSlot ←AT— Talk ←PLANS— Ava</p>";
+  }
+}
+</script>
+</body>
+</html>

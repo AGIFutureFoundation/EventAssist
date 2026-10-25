@@ -1,0 +1,7 @@
+name,interests,met,plans
+# Fill this in with your real contacts, one per line.
+# interests: comma-separated topics, e.g. Agents;GraphRAG
+# met: ids of contacts already met, e.g. marcus
+# plans: talk ids planned, e.g. t1;t3
+# Example (demo contact, already in the graph):
+Ava Chen,Agents;GraphRAG,marcus,t1;t3
