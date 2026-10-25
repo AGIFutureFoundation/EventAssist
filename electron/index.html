@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>EventAssist v4 — Deep Graph Product (Electron)</title>
+<title>EventAssist v5 — Deep Graph Product (Electron)</title>
 <style>
 body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;max-width:1080px;margin:0 auto;padding:0 1rem 3rem;background:#f6f8f7;color:#111}
 header{background:linear-gradient(135deg,#0b3d36,#0e7a6b);color:#fff;border-radius:0 0 16px 16px;padding:1.5rem 1.5rem 1rem;margin:0 -1rem 1rem}
@@ -136,4 +136,4 @@ document.getElementById('out').innerHTML=`<h3>Results for ${me.name} — ${topic
 }
 function resetMemory(){metState=JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(people).map(([k,v])=>[k,[...v.met]])))); runAll();}
 show('graph');
-</script></body></html>
+</script><div class="card"><h2>Video + Graph Confirmation</h2><p><b>Demo video (on submission):</b> <a href="https://muse.ai/files/1400697143128615/2218660302045251/u7tdc3oyj34vbq8j7yjsf6bx/teaser_full.mp4">teaser_full.mp4 — 1:00, teaser-style, full voice narration</a><br><b>Marketing video:</b> <a href="https://muse.ai/files/1400697143128615/1190894083602666/g5rs9bmhvh4fp86jx0bkczwb/marketing.mp4">marketing.mp4 — 0:55</a><br><b>FalkorDB graph confirmation:</b> <a href="https://muse.ai/files/1400697143128615/1120780310447307/3zmxkfmubyreg4vg5azljcz3/graph_confirmation.html">graph_confirmation.html</a> — instance-si114dlr3, graph eventassist, expected 19 nodes / 26 edges<br><b>Tracks:</b> FalkorDB Track + Qodo Track<br><b>Repo / PR:</b> <a href="https://github.com/AGIFutureFoundation/EventAssist/pull/1">PR #1</a></p></div></body></html>
