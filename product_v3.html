@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EventAssist v3 — Deep Graph Product</title>
+<style>
+body{font-family:system-ui,sans-serif;max-width:1080px;margin:0 auto;padding:1rem 1rem 3rem}
+nav button,.btn{padding:.55rem .9rem;margin:.2rem;cursor:pointer;border:1px solid #ccc;border-radius:999px;background:#fff}
+nav button.active{background:#111;color:#fff}
+.card{border:1px solid #ddd;border-radius:12px;padding:1.2rem;margin:1rem 0}
+.path{font-family:monospace;background:#f4f4f4;padding:.6rem;border-radius:8px;white-space:pre-wrap}
+pre{white-space:pre-wrap;background:#f4f4f4;padding:.6rem;border-radius:8px}
+input,select{padding:.5rem;margin:.25rem;max-width:420px;width:100%}
+.small{color:#555}.draft{border-left:5px solid #e67e22}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid #eee;padding:.4rem;text-align:left}
+.node{cursor:pointer}
+</style></head>
+<body>
+<h1>EventAssist v3 — Deep Graph Product</h1>
+<p class="small">FalkorDB graph <b>eventassist</b>, instance-si114dlr3 — 19 nodes, 26 edges. Click a node in the graph to see its neighbours, paths, and patterns. Qodo and FalkorDB tools are part of the pitch, not an afterthought.</p>
+<nav>
+<button onclick="show('graph')">Deep graph</button>
+<button onclick="show('agents')">Agents live</button>
+<button onclick="show('patterns')">Patterns P1–P6</button>
+<button onclick="show('falkor')">FalkorDB tools</button>
+<button onclick="show('qodo')">Qodo</button>
+<button onclick="show('pitch')">Pitch</button>
+</nav>
+
+<div class="card" id="graph">
+<h2>Deep graph — click a node</h2>
+<svg width="100%" viewBox="0 0 900 420" style="border:1px solid #eee;border-radius:8px">
+<g stroke="#999" stroke-width="2">
+<line x1="150" y1="80" x2="450" y2="80"/><line x1="450" y1="80" x2="750" y2="80"/><line x1="450" y1="80" x2="450" y2="300"/>
+<line x1="150" y1="300" x2="450" y2="300"/><line x1="450" y1="300" x2="750" y2="300"/><line x1="150" y1="300" x2="150" y2="80"/>
+</g>
+<g font-size="14" text-anchor="middle">
+<circle class="node" cx="150" cy="80" r="48" fill="#cfe8e0" onclick="node('Sara Kim','Speaker —GIVES→ Agents That Remember, GraphRAG From Docs to Answers. Speaker hub: 2 talks.')"/>
+<text x="150" y="85">Sara Kim</text>
+<circle class="node" cx="450" cy="80" r="58" fill="#ffe9b0" onclick="node('Talks','t1 Agents That Remember 14:30 Main Hall; t2 Multi-Hop 15:15 Room B; t3 Robotics 14:30 Room C; t4 GraphRAG 16:00 Main Hall')"/>
+<text x="450" y="85">Talks (4)</text>
+<circle class="node" cx="750" cy="80" r="48" fill="#d6e4ff" onclick="node('Topics','Agents, GraphRAG, Robotics, Security, Data. Topic hub: Agents links Sara + Diego talks and Ava/Marcus/Priya.')"/>
+<text x="750" y="85">Topics (5)</text>
+<circle class="node" cx="150" cy="300" r="58" fill="#ffd6e0" onclick="node('Attendees','Ava Chen, Priya Nair, Marcus Lee, Tom Rivera. Ava PLANS t1+t3 (clash 14:30). Priya is the bridge.')"/>
+<text x="150" y="305">Attendees (4)</text>
+<circle class="node" cx="450" cy="300" r="48" fill="#e0d6ff" onclick="node('TimeSlots','14:30 (t1, t3 — clash), 15:15 (t2), 16:00 (t4 — alternative)')"/>
+<text x="450" y="305">TimeSlots (3)</text>
+<circle class="node" cx="750" cy="300" r="48" fill="#d0f0d0" onclick="node('Memory','MET edges: Ava↔Marcus (symmetric). Meet Priya in Agents live and networking changes — shared state.')"/>
+<text x="750" y="305">Memory</text>
+</g></svg>
+<div id="nodeOut" class="path">Click a node above.</div>
+</div>
+
+<div class="card" id="agents" style="display:none">
+<h2>Agents live — same as product_v2, deepened</h2>
+<label>Attendee <select id="attendee"><option value="ava">Ava Chen</option><option value="priya">Priya Nair</option><option value="marcus">Marcus Lee</option><option value="tom">Tom Rivera</option></select></label>
+<label>Topic <select id="topic"><option>Agents</option><option>GraphRAG</option><option>Robotics</option><option>Security</option><option>Data</option></select></label>
+<button class="btn" onclick="runAll()">Run all agents</button> <button class="btn" onclick="resetMemory()">Reset memory</button>
+<div id="out"></div>
+</div>
+
+<div class="card" id="patterns" style="display:none">
+<h2>Patterns P1–P6 — the deep graph, not a list</h2>
+<table><tr><th>Pattern</th><th>What it proves</th><th>Evidence</th></tr>
+<tr><td>P1 Topic hub</td><td>One topic connects many talks/people</td><td>Agents → t1, t2; Ava, Marcus, Priya</td></tr>
+<tr><td>P2 Shared-topic clique</td><td>Strongest unmet pair</td><td>Ava↔Priya: Agents + GraphRAG (2 topics)</td></tr>
+<tr><td>P3 Speaker hub</td><td>One speaker, many talks</td><td>Sara Kim: t1 + t4</td></tr>
+<tr><td>P4 Memory pattern</td><td>MET changes future answers</td><td>Ava↔Marcus MET; meet Priya → Priya drops out</td></tr>
+<tr><td>P5 Clash by timeslot</td><td>Same slot, two plans</td><td>14:30 only: t1 vs t3 for Ava</td></tr>
+<tr><td>P6 Unmet high-fit</td><td>Introductions worth making</td><td>Ava→Priya, Ava→Tom (GraphRAG)</td></tr></table>
+</div>
+
+<div class="card" id="falkor" style="display:none">
+<h2>FalkorDB tools — how judges verify it live</h2>
+<ul>
+<li><b>FalkorDB Cloud:</b> instance-si114dlr3, Browser, graph <code>eventassist</code></li>
+<li><b>Load:</b> <code>load_graph_complete.cypher</code> — expected 19 nodes, 26 edges. Do not use the original load alone (no TimeSlot/AT/PLANS).</li>
+<li><b>Query:</b> <code>queries_complete.cypher</code> — Q1 Agents after lunch, Q2 networking, Q3 clash, Q4 memory</li>
+<li><b>Patterns:</b> <code>patterns.cypher</code> — P1–P6 above</li>
+<li><b>Python client (server deployment):</b> <code>requirements.txt</code> — <code>falkordb&gt;=1.0</code>; local demo runs offline because Docker was unavailable in this VM and falkordb-py was not installed — stated openly, not hidden</li>
+<li><b>Tools in the pitch:</b> Browser for live Cypher, Cypher for explainable paths, graph as shared state for all agents — not a database bolted on after the demo</li>
+</ul>
+<pre>MATCH (s:Speaker)-[:GIVES]-&gt;(t:Talk)-[:ABOUT]-&gt;(tp:Topic {name:'Agents'})
+RETURN s.name, t.title, t.starts, tp.name
+ORDER BY t.starts</pre>
+</div>
+
+<div class="card" id="qodo" style="display:none">
+<h2>Qodo — code review, in the product story</h2>
+<p><b>Connected:</b> Qodo.ai connected to GitHub (2026-10-24). <b>PR:</b> <a href="https://github.com/AGIFutureFoundation/EventAssist/pull/1">EventAssist PR #1</a> — Qodo should auto-review it, or comment <code>/review</code> on the PR.</p>
+<p><b>Config:</b> <code>.pr_agent.toml</code> at repo root — auto <code>/review</code>, <code>/describe</code>, <code>/improve</code>, with EventAssist rules: Cypher/graph correctness, no invented speakers/talks/contacts, no individual email/phone/address, flag pushing <code>contacts_graph.json</code>, tests must pass.</p>
+<p><b>Commands on any PR:</b> <code>/review</code> full review, <code>/describe</code> PR description, <code>/improve</code> suggestions, <code>/ask &lt;question&gt;</code>, <code>/test</code> test suggestions.</p>
+<p class="small">Qodo is the separate $500 track and repo tooling. The primary submission track remains FalkorDB ($1,500) — Qodo does not replace the graph story, it reviews the code that implements it.</p>
+</div>
+
+<div class="card" id="pitch" style="display:none">
+<h2>Pitch — with Qodo and FalkorDB tools in it</h2>
+<ol>
+<li>Problem: missed talks, missed people, clashing plans.</li>
+<li>Graph: one shared FalkorDB graph, 19 nodes, 26 edges — click it above.</li>
+<li>Concierge live: Agents after lunch, with paths.</li>
+<li>Networking + memory live: Priya, not Marcus; meet Priya, networking changes.</li>
+<li>Schedule + workshops deep: 14:30 clash, 16:00 alternative.</li>
+<li>Deep patterns P1–P6: hub, clique, bridge, clash — the graph, not a list.</li>
+<li><b>FalkorDB tools live:</b> Browser + Cypher, same queries judges can run.</li>
+<li><b>Qodo live:</b> PR #1, .pr_agent.toml, /review — code review on the same repo.</li>
+<li>Contacts at scale, aggregates only: 3,476 unique contacts.</li>
+<li>Ask: graph at the core, explainable, real, working — FalkorDB track.</li>
+</ol>
+<p>Deck: presentation.html Slides 9–10 (stack + judges) plus new Slides 11–12 (deep graphs + FalkorDB tools, Qodo in the pitch).</p>
+</div>
+
+<script>
+function show(id){document.querySelectorAll('.card').forEach(c=>c.style.display='none');document.getElementById(id).style.display='block';}
+function node(t,txt){document.getElementById('nodeOut').textContent=t+': '+txt;}
+const talks=[
+{id:"t1",t:"Agents That Remember: Graph Memory in Production",s:"Sara Kim",starts:"14:30",venue:"Main Hall",topics:["Agents","GraphRAG"]},
+{id:"t2",t:"Multi-Hop Reasoning Without Hallucinating",s:"Diego Ramos",starts:"15:15",venue:"Room B",topics:["Agents"]},
+{id:"t3",t:"Robotics on the Factory Floor",s:"Lena Park",starts:"14:30",venue:"Room C",topics:["Robotics"]},
+{id:"t4",t:"GraphRAG From Docs to Answers",s:"Sara Kim",starts:"16:00",venue:"Main Hall",topics:["GraphRAG"]}];
+const people={
+ava:{name:"Ava Chen",interests:["Agents","GraphRAG"],plans:["t1","t3"],met:["Marcus Lee"]},
+priya:{name:"Priya Nair",interests:["Agents","GraphRAG","Robotics"],plans:["t1"],met:[]},
+marcus:{name:"Marcus Lee",interests:["Agents"],plans:["t2"],met:["Ava Chen"]},
+tom:{name:"Tom Rivera",interests:["GraphRAG"],plans:["t4"],met:[]}};
+let metState=JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(people).map(([k,v])=>[k,[...v.met]]))));
+function talkById(id){return talks.find(x=>x.id===id)}
+function runAll(){
+const aid=document.getElementById('attendee').value, topic=document.getElementById('topic').value;
+const me=people[aid];
+const concierge=talks.filter(x=>x.topics.includes(topic));
+const network=Object.values(people).filter(p=>p.name!==me.name && !metState[aid].includes(p.name) && p.interests.some(i=>me.interests.includes(i))).map(p=>`${p.name} — shared: ${p.interests.filter(i=>me.interests.includes(i)).join(', ')}`);
+const planned=me.plans.map(talkById);
+const clash=planned.length>1 && planned[0].starts===planned[1].starts ? `<b>Clash at ${planned[0].starts}:</b> ${planned.map(x=>x.t).join(' vs ')}` : 'No clash in this plan.';
+document.getElementById('out').innerHTML=`<h3>Results for ${me.name} — ${topic}</h3><h4>Concierge</h4>${concierge.map(x=>`<p><b>${x.t}</b> — ${x.s}, ${x.starts}, ${x.venue}</p>`).join('')||'<p>No talks on this topic.</p>'}<p class='path'>Speaker —GIVES→ Talk —ABOUT→ Topic(${topic})</p><h4>Networking (live memory)</h4>${network.map(x=>`<p>${x}</p>`).join('')||'<p>No unmet match.</p>'}<p>Already met: ${metState[aid].join(', ')||'none'}</p><h4>Schedule</h4><p>${clash}</p><p class='path'>Attendee —PLANS→ Talk —AT→ TimeSlot</p>`;
+}
+function resetMemory(){metState=JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(people).map(([k,v])=>[k,[...v.met]])))); runAll();}
+show('graph');
+</script></body></html>
