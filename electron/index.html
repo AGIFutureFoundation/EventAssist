@@ -136,4 +136,18 @@ document.getElementById('out').innerHTML=`<h3>Results for ${me.name} — ${topic
 }
 function resetMemory(){metState=JSON.parse(JSON.stringify(Object.fromEntries(Object.entries(people).map(([k,v])=>[k,[...v.met]])))); runAll();}
 show('graph');
-</script><div class="card"><h2>Video + Graph Confirmation</h2><p><b>Demo video (on submission):</b> <a href="https://muse.ai/files/1400697143128615/2218660302045251/u7tdc3oyj34vbq8j7yjsf6bx/teaser_full.mp4">teaser_full.mp4 — 1:00, teaser-style, full voice narration</a><br><b>Marketing video:</b> <a href="https://muse.ai/files/1400697143128615/1190894083602666/g5rs9bmhvh4fp86jx0bkczwb/marketing.mp4">marketing.mp4 — 0:55</a><br><b>FalkorDB graph confirmation:</b> <a href="https://muse.ai/files/1400697143128615/1120780310447307/3zmxkfmubyreg4vg5azljcz3/graph_confirmation.html">graph_confirmation.html</a> — instance-si114dlr3, graph eventassist, expected 19 nodes / 26 edges<br><b>Tracks:</b> FalkorDB Track + Qodo Track<br><b>Repo / PR:</b> <a href="https://github.com/AGIFutureFoundation/EventAssist/pull/1">PR #1</a></p></div></body></html>
+</script><div class="card"><h2>Video + Graph Confirmation</h2><p><b>Demo video (on submission):</b> <a href="https://muse.ai/files/1400697143128615/2218660302045251/u7tdc3oyj34vbq8j7yjsf6bx/teaser_full.mp4">teaser_full.mp4 — 1:00, teaser-style, full voice narration</a><br><b>Marketing video:</b> <a href="https://muse.ai/files/1400697143128615/1190894083602666/g5rs9bmhvh4fp86jx0bkczwb/marketing.mp4">marketing.mp4 — 0:55</a><br><b>FalkorDB graph confirmation:</b> <a href="https://muse.ai/files/1400697143128615/1120780310447307/3zmxkfmubyreg4vg5azljcz3/graph_confirmation.html">graph_confirmation.html</a> — instance-si114dlr3, graph eventassist, expected 19 nodes / 26 edges<br><b>Tracks:</b> FalkorDB Track + Qodo Track<br><b>Repo / PR:</b> <a href="https://github.com/AGIFutureFoundation/EventAssist/pull/1">PR #1</a></p></div>
+<section style="border:2px solid #0b3d36;border-radius:12px;padding:1rem;margin:1rem 0;background:#f0f7f5">
+<h2>Revived — Contacts Insights (private, aggregates only)</h2>
+<p><b>Your uploaded contacts, integrated locally — NOT the demo graph, NOT pushed to GitHub, NOT emailed.</b><br>
+Demo attendees (Ava, Marcus, Priya, Tom) are fictional and stay separate. The contacts below are real people from your 12 uploaded files, shown here only as aggregates.</p>
+<ul>
+<li><b>3,678 rows uploaded, 3,476 unique contacts, 2,873 unique emails</b> (deduplicated by ZoomInfo ID)</li>
+<li><b>Top industries:</b> Manufacturing 1,965 · Business Services 369 · Finance 311 · Energy/Utilities/Waste 200 · Transportation 144</li>
+<li><b>Top companies:</b> Sanmina 174 · Applied Materials 91 · Sun Pharma 71 · SuperMicro 70 · Petronas 60</li>
+<li><b>Top places:</b> California 1,647 · San Jose 274 · San Diego 147 · San Francisco 140 · Santa Clara 117</li>
+</ul>
+<p>What this means for EventAssist: this is a B2B manufacturing / finance-procurement buying-committee set, <b>not</b> a conference attendee list. Use it for aggregate pattern matching (which companies / industries to target at a conference), not as attendee suggestions. No individual name, email, phone, or address is in this public-facing panel, and the full contacts file stays local only.</p>
+<p><b>Revival status:</b> Demo tests 7/7 PASS (re-run 2026-10-26). FalkorDB instance-si114dlr3 was stopped 2026-10-26 00:03 PDT — restart it from the Cloud Dashboard before ~2026-11-02 or it is deleted. Teaser video Muse link expires today 2026-10-26 17:19 PDT; Drive copy is private by default.</p>
+</section>
+</body></html>

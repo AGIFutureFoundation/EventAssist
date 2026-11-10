@@ -1,7 +1,7 @@
 {
   "name": "eventassist",
-  "version": "1.0.0",
-  "description": "EventAssist — conference concierge on a shared FalkorDB graph (offline desktop demo)",
+  "version": "1.1.0",
+  "description": "EventAssist Enterprise \u2014 conference concierge on a shared FalkorDB graph, offline desktop demo with private contacts aggregates (no contacts pushed, emailed, or sent to any server)",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
